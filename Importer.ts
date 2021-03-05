@@ -1,7 +1,5 @@
 import * as Core from "@actions/core";
 import { Octokit } from "@octokit/rest";
-//**For Github authorization**//
-import { createActionAuth } from "@octokit/auth-action";
 import * as GitHub from "@actions/github";
 import { google } from "googleapis"
 
@@ -26,8 +24,9 @@ export class Importer {
             Core.info("Auth with GitHub Token...")
             const octokit = new Octokit()
             //** Added Github authorization **//
-            const auth = createActionAuth();
-            const authentication = await auth();
+            const { createActionAuth } = require("@octokit/auth-action");
+            const authGit = createActionAuth();
+            const authentication = await authGit();
             //** End **//
             Core.info("Done.")
             Core.endGroup()

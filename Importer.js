@@ -18,6 +18,11 @@ class Importer {
             }
             Core.info("Auth with GitHub Token...");
             const octokit = new rest_1.Octokit();
+            //** Added Github authorization **//
+            const { createActionAuth } = require("@octokit/auth-action");
+            const authGit = createActionAuth();
+            const authentication = await authGit();
+            //** End **//
             Core.info("Done.");
             Core.endGroup();
             Core.startGroup("📑 Getting all Issues in repository...");
